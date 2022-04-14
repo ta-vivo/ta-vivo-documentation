@@ -42,7 +42,8 @@ module.exports = {
     ],
     sidebar: [
       '/guide/',
-      '/front-end/'
+      '/front-end/',
+      '/back-end/'
     ]
   },
 
