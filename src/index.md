@@ -1,15 +1,11 @@
 ---
 home: true
-heroImage: https://v1.vuepress.vuejs.org/hero.png
+heroImage: img/main-logo.png
 tagline: Ta vivo documentation
 actionText: Quick Start →
 actionLink: /guide/
 features:
-- title: Feature 1 Title
-  details: Feature 1 Description
-- title: Feature 2 Title
-  details: Feature 2 Description
-- title: Feature 3 Title
-  details: Feature 3 Description
+- title: Step by step documentation
+  details: Step-by-step documentation on how to set up and maintain the project.
 footer: Made by Albert Hidalgo with ❤️
 ---
