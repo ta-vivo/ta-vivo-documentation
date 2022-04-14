@@ -24,6 +24,11 @@ cp .env.example .env
 
 This environment file contains the variables and values necessary to start the front-end without any further complications.
 
+Now you can run the app
+
+```bash
+quasar dev
+```
 ## Environment variables
 
 ### Required
