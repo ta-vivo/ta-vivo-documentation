@@ -7,7 +7,7 @@
     "name": "Albert Hidalgo",
     "email": "alhidalgodev@gmail.com"
   },
-  "repository": "https://github.com/itsalb3rt/ta-vivo-documentation.git/ta-vivo-documentation",
+  "repository": "https://github.com/itsalb3rt/ta-vivo-documentation.git",
   "scripts": {
     "dev": "vuepress dev src",
     "build": "vuepress build src"
