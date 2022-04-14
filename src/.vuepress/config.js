@@ -37,14 +37,19 @@ module.exports = {
     base: '/ta-vivo-documentation/',
     nav: [
       {
-        text: 'Guide',
+        text: 'Home',
         link: '/guide/',
+      },
+      {
+        text: 'License',
+        link: '/license/',
       }
     ],
     sidebar: [
       '/guide/',
       '/front-end/',
-      '/back-end/'
+      '/back-end/',
+      '/license/',
     ]
   },
 
