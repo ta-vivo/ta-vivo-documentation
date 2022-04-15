@@ -50,6 +50,7 @@ module.exports = {
       '/front-end/',
       '/back-end/',
       '/license/',
+      '/postman-collection/'
     ]
   },
 

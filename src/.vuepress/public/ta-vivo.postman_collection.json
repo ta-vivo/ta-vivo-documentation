@@ -1,0 +1,620 @@
+{
+	"info": {
+		"_postman_id": "7170eea0-9eaa-47ce-9e80-c80dd51f2120",
+		"name": "ta-vivo",
+		"description": "# Filters and More\n\nThe filters and sort work with `QueryStringConvertHelper.js` Util, for use it only import and use in your controller.\n\n``` javascript\nimport querystringConverterHelper from '../utils/querystringConverterHelper';\n// ..\nlet { where, limit, offset, order } = querystringConverterHelper.parseQuery(query);\n\n```\n\n## Query string\n\n**Filters**\n\n**between**\n\nFor example for check createdAt from `2020-09-01` to `2020-09-30`.\n\n```\napi/visits?createdAt=between:2020-09-01,2020-09-30\n\n```\n\n**Like**\n\nFor using `like` operator you can pass `search` query string var with `where` for indicate columns.\n\n```\napi/visits?search=some&where=reasonVisit\n\n```\n\nThis search for `some` in `reasonVisit` column.\n\n**Limit and offset**\n\nYou can use `limit` and `offset` for pagination.\n\n```\napi/visits?limit=10&page=2\n\n```\n\nThis example returns the records between 11 to 20\n\n**Order**\n\nUse `-` sign for descending while `+` for ascending, by default if sign is not presented it will automatically set to `+` sign (ex: `sort=-created_at` or `sort=+created_at`). Value can be separated by a comma if multiple sort condition is needed (ex: `sort=id,name`).\n\n```\napi/visits?sort=-created_at\n\n```\n\nMore information: [https://github.com/perbert27/sequelize-querystring-converter](https://github.com/perbert27/sequelize-querystring-converter)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Checks",
+			"item": [
+				{
+					"name": "/checks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/checks",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"checks"
+							]
+						},
+						"description": "# Response 2xx\n\n``` json\n{\n    \"message\": \"Check list\",\n    \"data\": [\n        {\n            \"id\": 8,\n            \"target\": \"google.com\",\n            \"periodToCheck\": \"*/10 * * * * *\",\n            \"enabled\": false,\n            \"createdAt\": \"2021-12-16T02:57:06.754Z\",\n            \"updatedAt\": \"2021-12-16T02:57:12.880Z\",\n            \"userId\": 1\n        },\n        {\n            \"id\": 9,\n            \"target\": \"google.com\",\n            \"periodToCheck\": \"*/10 * * * *\",\n            \"enabled\": false,\n            \"createdAt\": \"2021-12-16T03:31:31.728Z\",\n            \"updatedAt\": \"2021-12-16T03:32:36.143Z\",\n            \"userId\": 1\n        }\n    ],\n    \"status\": 200,\n    \"pagination\": {\n        \"count\": 2,\n        \"offset\": 0\n    }\n}\n\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/checks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"some name\",\n    \"target\": \"https://sheiley-shop.netlify.app\",\n    \"periodToCheck\": \"10s\",\n    \"enabled\": true,\n    \"addIntegrations\": [\n        {\n            \"id\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/checks",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"checks"
+							]
+						},
+						"description": "Add integration:\n\nTo add integration to check you need pass a `addIntegrations` property with array of integrations:\n\n``` json\n{\n  \"addIntegrations\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"id\": 2\n    }\n  ]\n}\n\n```\n\n# Response 2xx\n\n``` json\n{\n    \"message\": \"Check created\",\n    \"data\": {\n        \"id\": 9,\n        \"target\": \"https://sheiley-shop.netlify.app\",\n        \"periodToCheck\": \"*/10 * * * * *\",\n        \"enabled\": true,\n        \"userId\": 1,\n        \"updatedAt\": \"2021-12-16T03:31:31.728Z\",\n        \"createdAt\": \"2021-12-16T03:31:31.728Z\"\n    },\n    \"status\": 200\n}\n\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/checks/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"target\": \"google.com\",\n    \"periodToCheck\": \"10m\",\n    \"enabled\": false,\n    \"addIntegrations\": [\n        {\n            \"id\": 2\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/checks/8",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"checks",
+								"8"
+							]
+						},
+						"description": "``` json\n{\n  \"addIntegrations\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"id\": 2\n    }\n  ]\n}\n\n```\n\nTo remove integrations you need to pass `removeIntegrations` property\n\n```\n{\n    \"removeIntegrations\": [\n        {\n            \"id\": 2\n        }\n    ]\n}\n\n```\n\n# Response 2xx\n\n``` json\n{\n    \"message\": \"Check Updated\",\n    \"data\": {\n        \"id\": 9,\n        \"target\": \"google.com\",\n        \"periodToCheck\": \"*/10 * * * *\",\n        \"enabled\": false,\n        \"createdAt\": \"2021-12-16T03:31:31.728Z\",\n        \"updatedAt\": \"2021-12-16T03:32:36.143Z\",\n        \"userId\": 1,\n        \"check_integrations\": [\n            {\n                \"id\": 9,\n                \"createdAt\": \"2021-12-16T03:31:31.774Z\",\n                \"updatedAt\": \"2021-12-16T03:31:31.774Z\",\n                \"checkId\": 9,\n                \"integrationId\": 1,\n                \"integration\": {\n                    \"id\": 1,\n                    \"name\": \"My Telegram integration\",\n                    \"type\": \"telegram\",\n                    \"appUserId\": \"724402246\",\n                    \"createdAt\": \"2021-12-16T02:42:57.529Z\",\n                    \"updatedAt\": \"2021-12-16T02:42:57.529Z\",\n                    \"userId\": 1\n                }\n            }\n        ]\n    },\n    \"status\": 200\n}\n\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/checks/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/checks/8",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"checks",
+								"8"
+							]
+						},
+						"description": "# Response 2xx\n\n``` json\n{\n    \"message\": \"Check found\",\n    \"data\": {\n        \"id\": 8,\n        \"target\": \"google.com\",\n        \"periodToCheck\": \"*/10 * * * * *\",\n        \"enabled\": false,\n        \"createdAt\": \"2021-12-16T02:57:06.754Z\",\n        \"updatedAt\": \"2021-12-16T02:57:12.880Z\",\n        \"userId\": 1,\n        \"check_integrations\": [\n            {\n                \"id\": 8,\n                \"createdAt\": \"2021-12-16T02:57:06.781Z\",\n                \"updatedAt\": \"2021-12-16T02:57:06.781Z\",\n                \"checkId\": 8,\n                \"integrationId\": 1,\n                \"integration\": {\n                    \"id\": 1,\n                    \"name\": \"My Telegram integration\",\n                    \"type\": \"telegram\",\n                    \"appUserId\": \"724402246\",\n                    \"createdAt\": \"2021-12-16T02:42:57.529Z\",\n                    \"updatedAt\": \"2021-12-16T02:42:57.529Z\",\n                    \"userId\": 1\n                }\n            }\n        ]\n    },\n    \"status\": 200\n}\n\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/checks/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/checks/7",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"checks",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/checks/{id}/logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/checks/8/logs",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"checks",
+								"8",
+								"logs"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						},
+						"description": "# Response 2xx\n\n``` json\n{\n    \"message\": \"Check logs found\",\n    \"data\": [\n        {\n            \"id\": 10,\n            \"status\": \"up\",\n            \"createdAt\": \"2021-12-16T02:57:10.812Z\",\n            \"updatedAt\": \"2021-12-16T02:57:10.812Z\",\n            \"checkId\": 8\n        },\n        {\n            \"id\": 11,\n            \"status\": \"down\",\n            \"createdAt\": \"2021-12-16T02:57:20.011Z\",\n            \"updatedAt\": \"2021-12-16T02:57:20.011Z\",\n            \"checkId\": 8\n        },\n        {\n            \"id\": 12,\n            \"status\": \"down\",\n            \"createdAt\": \"2021-12-16T02:57:30.007Z\",\n            \"updatedAt\": \"2021-12-16T02:57:30.007Z\",\n            \"checkId\": 8\n        },\n        {\n            \"id\": 13,\n            \"status\": \"down\",\n            \"createdAt\": \"2021-12-16T02:57:40.004Z\",\n            \"updatedAt\": \"2021-12-16T02:57:40.004Z\",\n            \"checkId\": 8\n        },\n        {\n            \"id\": 14,\n            \"status\": \"down\",\n            \"createdAt\": \"2021-12-16T03:01:30.025Z\",\n            \"updatedAt\": \"2021-12-16T03:01:30.025Z\",\n            \"checkId\": 8\n        },\n        {\n            \"id\": 15,\n            \"status\": \"down\",\n            \"createdAt\": \"2021-12-16T03:01:40.010Z\",\n            \"updatedAt\": \"2021-12-16T03:01:40.010Z\",\n            \"checkId\": 8\n        },\n        {\n            \"id\": 16,\n            \"status\": \"down\",\n            \"createdAt\": \"2021-12-16T03:01:50.008Z\",\n            \"updatedAt\": \"2021-12-16T03:01:50.008Z\",\n            \"checkId\": 8\n        },\n        {\n            \"id\": 17,\n            \"status\": \"down\",\n            \"createdAt\": \"2021-12-16T03:02:10.015Z\",\n            \"updatedAt\": \"2021-12-16T03:02:10.015Z\",\n            \"checkId\": 8\n        },\n        {\n            \"id\": 18,\n            \"status\": \"down\",\n            \"createdAt\": \"2021-12-16T03:02:20.011Z\",\n            \"updatedAt\": \"2021-12-16T03:02:20.011Z\",\n            \"checkId\": 8\n        },\n        {\n            \"id\": 19,\n            \"status\": \"down\",\n            \"createdAt\": \"2021-12-16T03:02:30.006Z\",\n            \"updatedAt\": \"2021-12-16T03:02:30.006Z\",\n            \"checkId\": 8\n        }\n    ],\n    \"status\": 200,\n    \"pagination\": {\n        \"count\": 10,\n        \"offset\": 0\n    }\n}\n\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Integrations",
+			"item": [
+				{
+					"name": "/integrations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/integrations",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"integrations"
+							]
+						},
+						"description": "# Response 2xx\n\n``` json\n{\n    \"message\": \"Integrations list\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"My Telegram integration\",\n            \"type\": \"telegram\",\n            \"appUserId\": \"724402246\",\n            \"createdAt\": \"2021-12-16T02:42:57.529Z\",\n            \"updatedAt\": \"2021-12-16T02:42:57.529Z\",\n            \"userId\": 1\n        }\n    ],\n    \"status\": 200,\n    \"pagination\": {\n        \"count\": 1,\n        \"offset\": 0\n    }\n}\n\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/integrations",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uniqueCode\": \"f8skj\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/integrations",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"integrations"
+							]
+						},
+						"description": "When the user request a integration with `Telegram` the body require a `name` property to set the name into integrations.\n\nWhen the user request a `email` integration, only the `uniqueCode` is requiere."
+					},
+					"response": []
+				},
+				{
+					"name": "/integrations/request-email-code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"alhidalgodev@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/integrations/request-email-code",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"integrations",
+								"request-email-code"
+							]
+						},
+						"description": "# Response 2xx\n\nThis enpoint send a unique code to the email.\n\n``` json\n{\n    \"message\": \"Confirmation sent\",\n    \"data\": {},\n    \"status\": 200\n}\n\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/integrations/slack",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"authorizationCode\": \"f8skj\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/integrations/slack",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"integrations",
+								"slack"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/integrations",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"my new name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/integrations",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"integrations"
+							]
+						},
+						"description": "When the user request a integration with `Telegram` the body require a `name` property to set the name into integrations.\n\nWhen the user request a `email` integration, only the `uniqueCode` is requiere."
+					},
+					"response": []
+				},
+				{
+					"name": "/integrations/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/integrations/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"integrations",
+								"1"
+							]
+						},
+						"description": "# Response 2xx\n\n``` json\n{\n    \"message\": \"Integration deleted\",\n    \"data\": {},\n    \"status\": 200\n}\n\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "/dashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dashboard",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"let jsonData = JSON.parse(responseBody)",
+									"if(jsonData.data.token){",
+									"pm.collectionVariables.set(\"TOKEN\", jsonData.data.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@tavivo.com\",\n    \"password\": \"secret\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullname\": \"Jhon Doe\",\n    \"email\":\"some@d.com\",\n    \"password\": \"Abc1234567\",\n    \"confirmPassword\": \"Abc1234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/register",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/register-confirme-email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uniqueCode\": \"Abc1234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/register-email-confirmation",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"register-email-confirmation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/request-register-confirme-email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/auth/request-register-email-confirmation",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"request-register-email-confirmation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/auth/me",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payments",
+			"item": [
+				{
+					"name": "/paypal-request-token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payments/paypal-request-token",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payments",
+								"paypal-request-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/paypal-subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"subscriptionId\": \"I-JTDNVHKUV92A\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/payments/paypal-subscription",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payments",
+								"paypal-subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/paypal-subscription-cancel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payments/paypal-subscription-cancel",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payments",
+								"paypal-subscription-cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/paypal-transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payments/paypal-transactions",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payments",
+								"paypal-transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pricing",
+			"item": [
+				{
+					"name": "/pricing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/pricing",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"pricing"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{TOKEN}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "x-access-token",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "http://localhost:5000/api"
+		},
+		{
+			"key": "TOKEN",
+			"value": ""
+		}
+	]
+}
