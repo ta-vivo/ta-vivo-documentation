@@ -252,6 +252,34 @@
 					"response": []
 				},
 				{
+					"name": "/integrations/test",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/integrations/test",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"integrations",
+								"test"
+							]
+						},
+						"description": "When the user request a integration with `Telegram` the body require a `name` property to set the name into integrations.\n\nWhen the user request a `email` integration, only the `uniqueCode` is requiere."
+					},
+					"response": []
+				},
+				{
 					"name": "/integrations",
 					"request": {
 						"method": "PUT",
@@ -394,6 +422,44 @@
 					"response": []
 				},
 				{
+					"name": "/change-password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"secret\",\n    \"password\": \"SomeSecure12\",\n    \"confirmPassword\": \"SomeSecure12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/change-password",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/register-confirme-email",
 					"request": {
 						"method": "POST",
@@ -415,6 +481,82 @@
 							"path": [
 								"auth",
 								"register-email-confirmation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/forgot-password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@tavivo.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/forgot-password",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/recover-password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@tavivo.com\",\n    \"uniqueCode\": \"07ce8060-baaa-4882-b13a-c2308e294dcb\",\n    \"password\": \"SomeSecure12\",\n    \"confirmPassword\": \"SomeSecure12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/recover-password",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"recover-password"
 							]
 						}
 					},
