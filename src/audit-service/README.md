@@ -80,3 +80,18 @@ DB_NAME=logs
 DB_USER=postgres
 DB_PASSWORD=postgres
 ```
+
+## Usage
+
+The unique enpoint is `/logs`, you can use the following methods:
+
+POST
+```json
+{
+    "userId": 1,
+    "action": "update",
+    "metaData": {
+        "property": "value"
+    }
+}
+```
