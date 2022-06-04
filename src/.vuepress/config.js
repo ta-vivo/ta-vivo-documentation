@@ -49,6 +49,7 @@ module.exports = {
       '/guide/',
       '/front-end/',
       '/back-end/',
+      '/audit-service/',
       '/postman-collection/',
       '/license/',
     ]
