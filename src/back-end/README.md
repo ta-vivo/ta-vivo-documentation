@@ -155,3 +155,19 @@ PAYPAL_PRO_SUBSCRIPTION_ID
 PAYPAL_ENTERPRISE_SUBSCRIPTION_ID
 PAYPAL_ENTERPRISEPLUS_SUBSCRIPTION_ID
 ```
+
+## Authentication with social networks
+
+All the documentation is on official suppabase page [https://supabase.com/docs/guides/auth](https://supabase.com/docs/guides/auth)
+
+At this moment only the list below is supported.
+
+- Discord [https://supabase.com/docs/guides/auth/auth-discord](https://supabase.com/docs/guides/auth/auth-discord)
+- Github [https://supabase.com/docs/guides/auth/auth-github](https://supabase.com/docs/guides/auth/auth-github)
+- Google [https://supabase.com/docs/guides/auth/auth-google](https://supabase.com/docs/guides/auth/auth-google)
+- Slack [https://supabase.com/docs/guides/auth/auth-slack](https://supabase.com/docs/guides/auth/auth-slack)
+
+```
+SUPABASE_PROJECT_URL
+SUPABASE_ANON_PUBLIC_KEY
+```
