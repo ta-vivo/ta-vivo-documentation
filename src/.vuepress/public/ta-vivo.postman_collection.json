@@ -3,7 +3,8 @@
 		"_postman_id": "7170eea0-9eaa-47ce-9e80-c80dd51f2120",
 		"name": "ta-vivo",
 		"description": "# Filters and More\n\nThe filters and sort work with `QueryStringConvertHelper.js` Util, for use it only import and use in your controller.\n\n``` javascript\nimport querystringConverterHelper from '../utils/querystringConverterHelper';\n// ..\nlet { where, limit, offset, order } = querystringConverterHelper.parseQuery(query);\n\n```\n\n## Query string\n\n**Filters**\n\n**between**\n\nFor example for check createdAt from `2020-09-01` to `2020-09-30`.\n\n```\napi/visits?createdAt=between:2020-09-01,2020-09-30\n\n```\n\n**Like**\n\nFor using `like` operator you can pass `search` query string var with `where` for indicate columns.\n\n```\napi/visits?search=some&where=reasonVisit\n\n```\n\nThis search for `some` in `reasonVisit` column.\n\n**Limit and offset**\n\nYou can use `limit` and `offset` for pagination.\n\n```\napi/visits?limit=10&page=2\n\n```\n\nThis example returns the records between 11 to 20\n\n**Order**\n\nUse `-` sign for descending while `+` for ascending, by default if sign is not presented it will automatically set to `+` sign (ex: `sort=-created_at` or `sort=+created_at`). Value can be separated by a comma if multiple sort condition is needed (ex: `sort=id,name`).\n\n```\napi/visits?sort=-created_at\n\n```\n\nMore information: [https://github.com/perbert27/sequelize-querystring-converter](https://github.com/perbert27/sequelize-querystring-converter)",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5796243"
 	},
 	"item": [
 		{
@@ -34,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"some name\",\n    \"target\": \"https://sheiley-shop.netlify.app\",\n    \"periodToCheck\": \"10s\",\n    \"enabled\": true,\n    \"addIntegrations\": [\n        {\n            \"id\": 1\n        }\n    ]\n}",
+							"raw": "{\n    \"name\": \"some name\",\n    \"target\": \"http://127.0.0.1:8081/\",\n    \"periodToCheck\": \"1m\",\n    \"enabled\": true,\n    \"retryOnFail\": true,\n    \"onFailPeriodToCheck\": \"30s\",\n    \"addIntegrations\": [\n        {\n            \"id\": 1\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -50,7 +51,7 @@
 								"checks"
 							]
 						},
-						"description": "Add integration:\n\nTo add integration to check you need pass a `addIntegrations` property with array of integrations:\n\n``` json\n{\n  \"addIntegrations\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"id\": 2\n    }\n  ]\n}\n\n```\n\n# Response 2xx\n\n``` json\n{\n    \"message\": \"Check created\",\n    \"data\": {\n        \"id\": 9,\n        \"target\": \"https://sheiley-shop.netlify.app\",\n        \"periodToCheck\": \"*/10 * * * * *\",\n        \"enabled\": true,\n        \"userId\": 1,\n        \"updatedAt\": \"2021-12-16T03:31:31.728Z\",\n        \"createdAt\": \"2021-12-16T03:31:31.728Z\"\n    },\n    \"status\": 200\n}\n\n```"
+						"description": "Add integration:\n\nTo add integration to check you need pass a `addIntegrations` property with array of integrations:\n\n``` json\n{\n  \"addIntegrations\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"id\": 2\n    }\n  ]\n}\n\n```\n\nRetry in fail:\n\nThe retry on fail require 2 properties, `retryOnFail` and `onFailPeriodToCheck`\n\n``` json\n{\n    \"name\": \"some name\",\n    \"target\": \"http://127.0.0.1:8081/\",\n    \"periodToCheck\": \"1m\",\n    \"enabled\": true,\n    \"retryOnFail\": true,\n    \"onFailPeriodToCheck\": \"30s\"\n}\n\n```\n\n# Response 2xx\n\n``` json\n{\n    \"message\": \"Check created\",\n    \"data\": {\n        \"id\": 9,\n        \"target\": \"https://sheiley-shop.netlify.app\",\n        \"periodToCheck\": \"*/10 * * * * *\",\n        \"enabled\": true,\n        \"userId\": 1,\n        \"updatedAt\": \"2021-12-16T03:31:31.728Z\",\n        \"createdAt\": \"2021-12-16T03:31:31.728Z\"\n    },\n    \"status\": 200\n}\n\n```"
 					},
 					"response": []
 				},
@@ -61,7 +62,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"target\": \"google.com\",\n    \"periodToCheck\": \"10m\",\n    \"enabled\": false,\n    \"addIntegrations\": [\n        {\n            \"id\": 2\n        }\n    ]\n}",
+							"raw": "{\n    \"target\": \"http://127.0.0.1:8081/\",\n    \"periodToCheck\": \"10m\",\n    \"enabled\": true,\n    \"retryOnFail\": false,\n    \"onFailPeriodToCheck\": \"30s\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -69,16 +70,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/checks/8",
+							"raw": "{{HOST}}/checks/1",
 							"host": [
 								"{{HOST}}"
 							],
 							"path": [
 								"checks",
-								"8"
+								"1"
 							]
 						},
-						"description": "``` json\n{\n  \"addIntegrations\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"id\": 2\n    }\n  ]\n}\n\n```\n\nTo remove integrations you need to pass `removeIntegrations` property\n\n```\n{\n    \"removeIntegrations\": [\n        {\n            \"id\": 2\n        }\n    ]\n}\n\n```\n\n# Response 2xx\n\n``` json\n{\n    \"message\": \"Check Updated\",\n    \"data\": {\n        \"id\": 9,\n        \"target\": \"google.com\",\n        \"periodToCheck\": \"*/10 * * * *\",\n        \"enabled\": false,\n        \"createdAt\": \"2021-12-16T03:31:31.728Z\",\n        \"updatedAt\": \"2021-12-16T03:32:36.143Z\",\n        \"userId\": 1,\n        \"check_integrations\": [\n            {\n                \"id\": 9,\n                \"createdAt\": \"2021-12-16T03:31:31.774Z\",\n                \"updatedAt\": \"2021-12-16T03:31:31.774Z\",\n                \"checkId\": 9,\n                \"integrationId\": 1,\n                \"integration\": {\n                    \"id\": 1,\n                    \"name\": \"My Telegram integration\",\n                    \"type\": \"telegram\",\n                    \"appUserId\": \"724402246\",\n                    \"createdAt\": \"2021-12-16T02:42:57.529Z\",\n                    \"updatedAt\": \"2021-12-16T02:42:57.529Z\",\n                    \"userId\": 1\n                }\n            }\n        ]\n    },\n    \"status\": 200\n}\n\n```"
+						"description": "``` json\n{\n  \"addIntegrations\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"id\": 2\n    }\n  ]\n}\n\n```\n\nTo remove integrations you need to pass `removeIntegrations` property\n\n```\n{\n    \"removeIntegrations\": [\n        {\n            \"id\": 2\n        }\n    ]\n}\n\n```\n\nRetry in fail:\n\nThe retry on fail require 2 properties, `retryOnFail` and `onFailPeriodToCheck`\n\n``` json\n{\n    \"target\": \"htt://127.0.0.1:8081\",\n    \"periodToCheck\": \"10m\",\n    \"enabled\": true,\n    \"retryOnFail\": true,\n    \"onFailPeriodToCheck\": \"30s\"\n}\n\n```\n\n# Response 2xx\n\n``` json\n{\n    \"message\": \"Check Updated\",\n    \"data\": {\n        \"id\": 9,\n        \"target\": \"google.com\",\n        \"periodToCheck\": \"*/10 * * * *\",\n        \"enabled\": false,\n        \"createdAt\": \"2021-12-16T03:31:31.728Z\",\n        \"updatedAt\": \"2021-12-16T03:32:36.143Z\",\n        \"userId\": 1,\n        \"check_integrations\": [\n            {\n                \"id\": 9,\n                \"createdAt\": \"2021-12-16T03:31:31.774Z\",\n                \"updatedAt\": \"2021-12-16T03:31:31.774Z\",\n                \"checkId\": 9,\n                \"integrationId\": 1,\n                \"integration\": {\n                    \"id\": 1,\n                    \"name\": \"My Telegram integration\",\n                    \"type\": \"telegram\",\n                    \"appUserId\": \"724402246\",\n                    \"createdAt\": \"2021-12-16T02:42:57.529Z\",\n                    \"updatedAt\": \"2021-12-16T02:42:57.529Z\",\n                    \"userId\": 1\n                }\n            }\n        ]\n    },\n    \"status\": 200\n}\n\n```"
 					},
 					"response": []
 				},
@@ -176,7 +177,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"uniqueCode\": \"f8skj\"\n}",
+							"raw": "{\n    \"name\": \"telegram\",\n    \"uniqueCode\": \"yoyax\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -280,33 +281,6 @@
 					"response": []
 				},
 				{
-					"name": "/integrations",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"my new name\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{HOST}}/integrations",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"integrations"
-							]
-						},
-						"description": "When the user request a integration with `Telegram` the body require a `name` property to set the name into integrations.\n\nWhen the user request a `email` integration, only the `uniqueCode` is requiere."
-					},
-					"response": []
-				},
-				{
 					"name": "/integrations/{id}",
 					"request": {
 						"method": "DELETE",
@@ -322,6 +296,34 @@
 							]
 						},
 						"description": "# Response 2xx\n\n``` json\n{\n    \"message\": \"Integration deleted\",\n    \"data\": {},\n    \"status\": 200\n}\n\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "/integrations",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"my new name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/integrations/2",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"integrations",
+								"2"
+							]
+						},
+						"description": "When the user request a integration with `Telegram` the body require a `name` property to set the name into integrations.\n\nWhen the user request a `email` integration, only the `uniqueCode` is requiere."
 					},
 					"response": []
 				}
@@ -593,6 +595,174 @@
 							"path": [
 								"auth",
 								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/discord",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"let jsonData = JSON.parse(responseBody)",
+									"if(jsonData.data.token){",
+									"pm.collectionVariables.set(\"TOKEN\", jsonData.data.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"access_token\": \"JWT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/discord",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"discord"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/github",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"let jsonData = JSON.parse(responseBody)",
+									"if(jsonData.data.token){",
+									"pm.collectionVariables.set(\"TOKEN\", jsonData.data.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"access_token\": \"JWT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/github",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"github"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/google",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"let jsonData = JSON.parse(responseBody)",
+									"if(jsonData.data.token){",
+									"pm.collectionVariables.set(\"TOKEN\", jsonData.data.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"access_token\": \"JWT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/google",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"google"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/slack",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"let jsonData = JSON.parse(responseBody)",
+									"if(jsonData.data.token){",
+									"pm.collectionVariables.set(\"TOKEN\", jsonData.data.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"access_token\": \"JWT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/slack",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"slack"
 							]
 						}
 					},
