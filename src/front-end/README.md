@@ -42,3 +42,19 @@ quasar dev
 **VUE_APP_CONTACT_EMAIL**: The email to show in legal pages.
 
 **PAYPAL_CLIENT_ID**: This is unique to each instance, for example, if you like to self-host and put it as a service you need to create a PayPal business account and get your own PayPal client id.
+
+## Authentication with social networks
+
+All the documentation is on the official Supabase page, [https://supabase.com/docs/guides/auth](https://supabase.com/docs/guides/auth)
+
+At this moment, only the list below is supported.
+
+- Discord [https://supabase.com/docs/guides/auth/auth-discord](https://supabase.com/docs/guides/auth/auth-discord)
+- Github [https://supabase.com/docs/guides/auth/auth-github](https://supabase.com/docs/guides/auth/auth-github)
+- Google [https://supabase.com/docs/guides/auth/auth-google](https://supabase.com/docs/guides/auth/auth-google)
+- Slack [https://supabase.com/docs/guides/auth/auth-slack](https://supabase.com/docs/guides/auth/auth-slack)
+
+```
+SUPABASE_PROJECT_URL
+SUPABASE_ANON_PUBLIC_KEY
+```
