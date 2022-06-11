@@ -158,9 +158,9 @@ PAYPAL_ENTERPRISEPLUS_SUBSCRIPTION_ID
 
 ## Authentication with social networks
 
-All the documentation is on official suppabase page [https://supabase.com/docs/guides/auth](https://supabase.com/docs/guides/auth)
+All the documentation is on the official Supabase page, [https://supabase.com/docs/guides/auth](https://supabase.com/docs/guides/auth)
 
-At this moment only the list below is supported.
+At this moment, only the list below is supported.
 
 - Discord [https://supabase.com/docs/guides/auth/auth-discord](https://supabase.com/docs/guides/auth/auth-discord)
 - Github [https://supabase.com/docs/guides/auth/auth-github](https://supabase.com/docs/guides/auth/auth-github)
