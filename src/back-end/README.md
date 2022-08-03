@@ -13,7 +13,7 @@ The backend is built on top of [NodeJS](https://nodejs.org/es/), using [expressJ
 First clone the repository
 
 ```bash
-git clone https://github.com/itsalb3rt/ta-vivo-api
+git clone https://github.com/ta-vivo/ta-vivo-api
 ```
 
 Now install all the dependencies
@@ -41,7 +41,7 @@ yarn dev
 First clone the repository
 
 ```bash
-git clone https://github.com/itsalb3rt/ta-vivo-api
+git clone https://github.com/ta-vivo/ta-vivo-api
 ```
 
 Now install all the dependencies

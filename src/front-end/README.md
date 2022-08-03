@@ -7,7 +7,7 @@ The front-end is basically done in [vue](https://vuejs.org/guide/introduction.ht
 First clone the repository
 
 ```bash
-git clone https://github.com/itsalb3rt/ta-vivo
+git clone https://github.com/ta-vivo/ta-vivo
 ```
 
 Now install all the dependencies
