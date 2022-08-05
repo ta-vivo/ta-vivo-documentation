@@ -120,7 +120,7 @@ All the variables below are required if you want to use discord. Follow the docu
 
 <img :src="$withBase('/img/discord-integration.png')" />
 
-```
+```bash
 DISCORD_CLIENT_ID
 DISCORD_CLIENT_SECRET
 DISCORD_REDIRECT_URI
@@ -131,7 +131,7 @@ DISCORD_REDIRECT_URI
 ### Email
 All the next variables is required if you want receive notification via email.
 
-```
+```bash
 MAIL_HOST
 MAIL_PORT
 MAIL_EMAIL
@@ -145,7 +145,7 @@ All the variables below are required if you want to use Slack. Follow the docume
 
 <img :src="$withBase('/img/slack-integration.png')" />
 
-```
+```bash
 SLACK_CLIENT_ID
 SLACK_CLIENT_SECRET
 SLACK_REDIRECT_URI
@@ -160,24 +160,30 @@ SLACK_BOT_PORT
 
 To use telegram you need to create a bot in your telegram account, you can do it in the [telegram bot creator](https://core.telegram.org/bots).
 
-**TELEGRAM_BOT_TOKEN**: A telegram bot token to receive notifications via telegram.
-
+```bash
+TELEGRAM_BOT_TOKEN
+```
 ---
 
 ### Whatsapp
 
 The WhatsApp integration is a microservice that send messages to users via whatsapp. Check the repository [here](https://github.com/ta-vivo/ta-vivo-whatsapp-service)
 
+<img :src="$withBase('/img/whatsapp-integration.png')" />
+
+```bash
 WHATSAPP_SERVICE_API
 WHATSAPP_SERVICE_API_TOKEN
-
+```
 ---
 
 ## Paypal
+
 Payment with Paypal, this allow you to pay with paypal, you need to create a paypal account and set the variables below.
 
+<img :src="$withBase('/img/paypal-integration.png')" />
 
-```
+```bash
 PAYPAL_API
 PAYPAL_CLIENT_ID
 PAYPAL_APP_SECRET
