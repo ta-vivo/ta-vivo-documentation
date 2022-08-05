@@ -2,6 +2,8 @@
 
 The backend is built on top of [NodeJS](https://nodejs.org/es/), using [expressJS](https://expressjs.com/) and other cool tools like [Sequelize](https://sequelize.org/) and [Docker](https://www.docker.com/).
 
+Have a multiple integrations with external services like [Telegram](https://telegram.org/), [Slack](https://slack.com/), [Discord](https://discordapp.com/), [WhatsApp](https://developers.facebook.com/docs/whatsapp/cloud-api/) and [Paypal](https://www.paypal.com/).
+
 ## Requeriments
 
 - node >= 14
@@ -103,26 +105,17 @@ ADMIN_PASSWORD
 
 **FORCE_SYNC**: This is a destructive variable, if this set in `true` all the tables in the database with some name like any model in the API are dropped.
 
-## Notification variables
+## Integrations
 
-**TELEGRAM_BOT_TOKEN**: A telegram bot token to receive notifications via telegram.
+The integrations is a important part of the API, the integrations are the tools that allow the API to send notifications to the users. At this moment we have a few integrations:
 
----
+- [Discord](#discord)
+- [Email](#email)
+- [Slack](#slack)
+- [Telegram](#telegram)
+- [WhatsApp](#whatsapp)
 
-All the variables below are required if you want to use Slack. Follow the documentation [https://slack.dev/bolt-js/concepts](https://slack.dev/bolt-js/concepts)
-
-<img :src="$withBase('/img/slack-integration.png')" />
-
-```
-SLACK_CLIENT_ID
-SLACK_CLIENT_SECRET
-SLACK_REDIRECT_URI
-SLACK_SIGNING_SECRET
-SLACK_BOT_TOKEN
-SLACK_BOT_PORT
-```
----
-
+### Discord
 All the variables below are required if you want to use discord. Follow the documentation [https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)
 
 <img :src="$withBase('/img/discord-integration.png')" />
@@ -135,6 +128,7 @@ DISCORD_REDIRECT_URI
 
 ---
 
+### Email
 All the next variables is required if you want receive notification via email.
 
 ```
@@ -143,9 +137,45 @@ MAIL_PORT
 MAIL_EMAIL
 MAIL_PASSWORD
 ```
+
 ---
 
-Payment with Paypal
+### Slack
+All the variables below are required if you want to use Slack. Follow the documentation [https://slack.dev/bolt-js/concepts](https://slack.dev/bolt-js/concepts)
+
+<img :src="$withBase('/img/slack-integration.png')" />
+
+```
+SLACK_CLIENT_ID
+SLACK_CLIENT_SECRET
+SLACK_REDIRECT_URI
+SLACK_SIGNING_SECRET
+SLACK_BOT_TOKEN
+SLACK_BOT_PORT
+```
+
+---
+
+### Telegram
+
+To use telegram you need to create a bot in your telegram account, you can do it in the [telegram bot creator](https://core.telegram.org/bots).
+
+**TELEGRAM_BOT_TOKEN**: A telegram bot token to receive notifications via telegram.
+
+---
+
+### Whatsapp
+
+The WhatsApp integration is a microservice that send messages to users via whatsapp. Check the repository [here](https://github.com/ta-vivo/ta-vivo-whatsapp-service)
+
+WHATSAPP_SERVICE_API
+WHATSAPP_SERVICE_API_TOKEN
+
+---
+
+## Paypal
+Payment with Paypal, this allow you to pay with paypal, you need to create a paypal account and set the variables below.
+
 
 ```
 PAYPAL_API
