@@ -207,3 +207,47 @@ At this moment, only the list below is supported.
 SUPABASE_PROJECT_URL
 SUPABASE_ANON_PUBLIC_KEY
 ```
+
+## Authorization headers
+
+The users can use a custom Authorization header, this is useful when the API requiere an authorization header and you don't want to use the default `Authorization` header.
+
+All the tokens is encrypted with the `crypto` standar library of nodejs, the encryption is made with the `aes-256-ctr` algorithm, and the token never comeback to the client.
+
+Example:
+
+```bash
+const crypto = require('crypto');
+
+const algorithm = 'aes-256-ctr';
+const secretKey = 'theSecretKey';
+
+const encrypt = (text) => {
+
+  const iv = crypto.randomBytes(16);
+
+  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+
+  const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
+
+  return {
+    iv: iv.toString('hex'),
+    content: encrypted.toString('hex')
+  };
+};
+
+const decrypt = (hash) => {
+
+  const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
+
+  const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
+
+  return decrpyted.toString();
+};
+
+const text = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+const encrypted = encrypt(text);
+console.log('🚀 ~ file: Untitled-1 ~ line 31 ~ encrypted', encrypted);
+const decrypted = decrypt(encrypted);
+console.log('🚀 ~ file: Untitled-1 ~ line 32 ~ decrypted', decrypted);
+```
