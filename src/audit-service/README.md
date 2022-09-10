@@ -144,4 +144,19 @@ The next section describe the current logs that are saved in the database with t
     }
 }
 ```
+### Notifications
+
+```json
+// On send notification
+{
+    "userId": 1,
+    "action": "notification_sent",
+    "metaData": {
+        "entity":"integration",
+        {"old": {
+            "to": "discord || email || slack || telegram || whatsapp"
+        }},
+        {"edited": {}}
+    }
+}
 ```
