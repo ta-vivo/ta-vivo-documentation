@@ -129,3 +129,19 @@ The next section describe the current logs that are saved in the database with t
     }
 }
 ```
+
+### Auth
+
+```json
+// On forgot password and on reset password
+{
+    "userId": 1,
+    "action": "password_change || password_forgot",
+    "metaData": {
+        "entity":"user",
+        {"old": {}},
+        {"edited": {}}
+    }
+}
+```
+```
