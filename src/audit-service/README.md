@@ -95,3 +95,37 @@ POST
     }
 }
 ```
+
+## Current saved logs
+
+The next section describe the current logs that are saved in the database with the current structure.
+
+### Checks
+
+```json
+// On update, on Disable, on Enable and on Delete
+{
+    "userId": 1,
+    "action": "update || delete",
+    "metaData": {
+        "entity":"check",
+        {"old": {}},
+        {"edited": {}}
+    }
+}
+```
+
+### Integrations
+
+```json
+// On update, on Delete and when the user request a integration test notification
+{
+    "userId": 1,
+    "action": "update || test || delete",
+    "metaData": {
+        "entity":"integration",
+        {"old": {}},
+        {"edited": {}}
+    }
+}
+```
