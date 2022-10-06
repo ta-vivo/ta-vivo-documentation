@@ -22,7 +22,7 @@ Now you need the environmente file, make a copy of the `.env.example` file
 cp .env.example .env
 ```
 
-This environment file contains the variables and values necessary to start the front-end without any further complications.
+Check the [Environment variables](#environment-variables) before running the project to set the correct values.
 
 Now you can run the app
 
