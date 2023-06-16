@@ -36,7 +36,7 @@ quasar dev
 ### Required
 **API**: The application API URL
 
-**VUE_APP_NAME**: The name render in the page title or page content like terms and conditions etc.
+**CUSTOM_APP_NAME**: The name render in the page title or page content like terms and conditions etc.
 
 To get supabase URL and key, you need to create a supabase account and create a new project. Then you can get the URL and key from the project settings. [https://supabase.com/docs/guides/with-vue-3#get-the-api-keys](https://supabase.com/docs/guides/with-vue-3#get-the-api-keys)
 
