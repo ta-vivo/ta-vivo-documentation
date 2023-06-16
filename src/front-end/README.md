@@ -26,6 +26,8 @@ Check the [Environment variables](#environment-variables) before running the pro
 
 Now you can run the app
 
+> Note: Make a sure you have the Quasar CLI installed, if not, run `yarn global add @quasar/cli` [https://quasar.dev/start/quasar-cli/](https://quasar.dev/start/quasar-cli/)
+
 ```bash
 quasar dev
 ```
